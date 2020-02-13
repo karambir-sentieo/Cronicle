@@ -72,6 +72,7 @@ Cronicle will emit a warning to the console if it is started up on any affected 
 		+ [udp_broadcast_port](#udp_broadcast_port)
 		+ [scheduler_startup_grace](#scheduler_startup_grace)
 		+ [universal_web_hook](#universal_web_hook)
+		+ [web_hook_only_error_logs](#web_hook_only_error_logs)
 		+ [web_hook_custom_data](#web_hook_custom_data)
 		+ [web_hook_text_templates](#web_hook_text_templates)
 		+ [ssl_cert_bypass](#ssl_cert_bypass)
@@ -495,6 +496,11 @@ Once a server becomes master, it should immediately attempt to connect to all re
 While you can specify a web hook in the UI per each category and/or per each event, this parameter allows you to define a universal one, which is *always* fired for *every* job regardless of UI settings.  It should be a fully-qualified URL to an API endpoint that accepts an HTTP POST containing JSON data.
 
 Web hooks are fired at the start and the end of each job (success or fail).  A JSON record is sent in the HTTP POST body, which contains all the relevant information about the job, including an `action` property, which will be set to `job_start` at the start and `job_complete` at the end of the job.  See the [Web Hooks](#event-web-hook) section below for more on the data format.
+
+### web_hook_only_error_logs
+
+Do not fire webhook on `job_start` and `job_complete` events. This will make sure that you will only get notifications about errors.
+Example:- `job_launch_failure` and `job_failure`
 
 ### web_hook_custom_data
 
